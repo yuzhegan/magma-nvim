@@ -33,16 +33,12 @@ class OutputChunk(ABC):
     ) -> str:
         pass
 
-
 # Adapted from [https://stackoverflow.com/a/14693789/4803382]:
 ANSI_CODE_REGEX = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
-
-
 def clean_up_text(text: str) -> str:
     text = ANSI_CODE_REGEX.sub("", text)
     text = text.replace("\r\n", "\n")
     return text
-
 
 class TextOutputChunk(OutputChunk):
     text: str
